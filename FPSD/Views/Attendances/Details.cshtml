@@ -1,0 +1,42 @@
+﻿@model FPSD.Models.Attendance
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Attendance</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AttendanceDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AttendanceDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PresentAbsent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PresentAbsent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExcusedUnexcused)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExcusedUnexcused)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AttendanceID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

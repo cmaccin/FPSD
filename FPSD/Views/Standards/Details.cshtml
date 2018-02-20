@@ -1,0 +1,42 @@
+﻿@model FPSD.Models.Standard
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Standard</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StandardsType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StandardsType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StandardsName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StandardsName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StandardsDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StandardsDescription)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.StandardsID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

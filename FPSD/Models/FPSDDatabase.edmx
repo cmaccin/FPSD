@@ -1,0 +1,1267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TeachingToolsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Assignment">
+          <Key>
+            <PropertyRef Name="AssignmentID" />
+          </Key>
+          <Property Name="AssignmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AssignmentName" Type="varchar" MaxLength="20" />
+          <Property Name="AssignmentDescription" Type="varchar" MaxLength="200" />
+          <Property Name="CreateDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="AttendanceID" />
+          </Key>
+          <Property Name="AttendanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AttendanceDate" Type="date" />
+          <Property Name="PresentAbsent" Type="varchar" MaxLength="10" />
+          <Property Name="ExcusedUnexcused" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Building">
+          <Key>
+            <PropertyRef Name="BuildingID" />
+          </Key>
+          <Property Name="BuildingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BuildingName" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="ClassID" />
+          </Key>
+          <Property Name="ClassID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassName" Type="varchar" MaxLength="50" />
+          <Property Name="ClassDescription" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="ClassBuilding">
+          <Key>
+            <PropertyRef Name="ClassID" />
+            <PropertyRef Name="BuildingID" />
+          </Key>
+          <Property Name="ClassID" Type="int" Nullable="false" />
+          <Property Name="BuildingID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClassRoom">
+          <Key>
+            <PropertyRef Name="ClassID" />
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="ClassID" Type="int" Nullable="false" />
+          <Property Name="RoomID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClassStandard">
+          <Key>
+            <PropertyRef Name="ClassID" />
+            <PropertyRef Name="StandardsID" />
+          </Key>
+          <Property Name="ClassID" Type="int" Nullable="false" />
+          <Property Name="StandardsID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Discipline">
+          <Key>
+            <PropertyRef Name="DisciplinaryID" />
+          </Key>
+          <Property Name="DisciplinaryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SuspensionType" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Enrollment">
+          <Key>
+            <PropertyRef Name="EnrollmentID" />
+          </Key>
+          <Property Name="EnrollmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SchoolYear" Type="int" />
+          <Property Name="GraduationYear" Type="int" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="LoginID" />
+          </Key>
+          <Property Name="LoginID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="20" />
+          <Property Name="Password" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonType" Type="varchar" MaxLength="15" />
+          <Property Name="FName" Type="varchar" MaxLength="50" />
+          <Property Name="LName" Type="varchar" MaxLength="50" />
+          <Property Name="Gender" Type="varchar" MaxLength="5" />
+          <Property Name="Ethnicity" Type="varchar" MaxLength="20" />
+          <Property Name="Address1" Type="varchar" MaxLength="50" />
+          <Property Name="Address2" Type="varchar" MaxLength="50" />
+          <Property Name="City" Type="varchar" MaxLength="20" />
+          <Property Name="State" Type="varchar" MaxLength="2" />
+          <Property Name="ZipCode" Type="int" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="10" />
+          <Property Name="Email" Type="varchar" MaxLength="40" />
+          <Property Name="EmergencyNumber" Type="varchar" MaxLength="10" />
+          <Property Name="Height" Type="varchar" MaxLength="20" />
+          <Property Name="Weight" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="PersonAssignment">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="AssignmentID" />
+          </Key>
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="AssignmentID" Type="int" Nullable="false" />
+          <Property Name="Grade" Type="int" />
+        </EntityType>
+        <EntityType Name="PersonAttendance">
+          <Key>
+            <PropertyRef Name="AttendanceID" />
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="AttendanceID" Type="int" Nullable="false" />
+          <Property Name="PersonID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonClass">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="ClassID" />
+          </Key>
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="ClassID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonDiscipline">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="DisciplinaryID" />
+          </Key>
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="DisciplinaryID" Type="int" Nullable="false" />
+          <Property Name="DisciplinaryDate" Type="date" />
+          <Property Name="DisciplinaryDescription" Type="varchar" MaxLength="200" />
+          <Property Name="ParentNotified" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="PersonEnrollment">
+          <Key>
+            <PropertyRef Name="EnrollmentID" />
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="EnrollmentID" Type="int" Nullable="false" />
+          <Property Name="PersonID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonLogin">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="LoginID" />
+          </Key>
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="LoginID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonSchool">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="SchoolID" />
+          </Key>
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="SchoolID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonSport">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="SportsID" />
+          </Key>
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="SportsID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="RoomID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoomName" Type="varchar" MaxLength="20" />
+          <Property Name="RoomNumber" Type="int" />
+        </EntityType>
+        <EntityType Name="RoomBuilding">
+          <Key>
+            <PropertyRef Name="BuildingID" />
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="BuildingID" Type="int" Nullable="false" />
+          <Property Name="RoomID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="School">
+          <Key>
+            <PropertyRef Name="SchoolID" />
+          </Key>
+          <Property Name="SchoolID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="SchoolLevel" Type="varchar" MaxLength="20" />
+          <Property Name="WebAddress" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="SchoolBuilding">
+          <Key>
+            <PropertyRef Name="BuildingID" />
+            <PropertyRef Name="SchoolID" />
+          </Key>
+          <Property Name="BuildingID" Type="int" Nullable="false" />
+          <Property Name="SchoolID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sport">
+          <Key>
+            <PropertyRef Name="SportsID" />
+          </Key>
+          <Property Name="SportsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SportsType" Type="varchar" MaxLength="20" />
+          <Property Name="SportsName" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Standards">
+          <Key>
+            <PropertyRef Name="StandardsID" />
+          </Key>
+          <Property Name="StandardsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StandardsType" Type="varchar" MaxLength="20" />
+          <Property Name="StandardsName" Type="varchar" MaxLength="20" />
+          <Property Name="StandardsDescription" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <Association Name="FK__ClassBuil__Build__7A672E12">
+          <End Role="Building" Type="Self.Building" Multiplicity="1" />
+          <End Role="ClassBuilding" Type="Self.ClassBuilding" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Building">
+              <PropertyRef Name="BuildingID" />
+            </Principal>
+            <Dependent Role="ClassBuilding">
+              <PropertyRef Name="BuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClassBuil__Class__797309D9">
+          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="ClassBuilding" Type="Self.ClassBuilding" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="ClassBuilding">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClassRoom__Class__7F2BE32F">
+          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="ClassRoom" Type="Self.ClassRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="ClassRoom">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClassRoom__RoomI__00200768">
+          <End Role="Room" Type="Self.Room" Multiplicity="1" />
+          <End Role="ClassRoom" Type="Self.ClassRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="RoomID" />
+            </Principal>
+            <Dependent Role="ClassRoom">
+              <PropertyRef Name="RoomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClassStan__Class__08B54D69">
+          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="ClassStandard" Type="Self.ClassStandard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="ClassStandard">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClassStan__Stand__09A971A2">
+          <End Role="Standards" Type="Self.Standards" Multiplicity="1" />
+          <End Role="ClassStandard" Type="Self.ClassStandard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Standards">
+              <PropertyRef Name="StandardsID" />
+            </Principal>
+            <Dependent Role="ClassStandard">
+              <PropertyRef Name="StandardsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonAss__Assig__70DDC3D8">
+          <End Role="Assignment" Type="Self.Assignment" Multiplicity="1" />
+          <End Role="PersonAssignment" Type="Self.PersonAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assignment">
+              <PropertyRef Name="AssignmentID" />
+            </Principal>
+            <Dependent Role="PersonAssignment">
+              <PropertyRef Name="AssignmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonAss__Grade__6FE99F9F">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="PersonAssignment" Type="Self.PersonAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="PersonAssignment">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonAtt__Atten__0E6E26BF">
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="1" />
+          <End Role="PersonAttendance" Type="Self.PersonAttendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attendance">
+              <PropertyRef Name="AttendanceID" />
+            </Principal>
+            <Dependent Role="PersonAttendance">
+              <PropertyRef Name="AttendanceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonAtt__Perso__0F624AF8">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="PersonAttendance" Type="Self.PersonAttendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="PersonAttendance">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonCla__Class__76969D2E">
+          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="PersonClass" Type="Self.PersonClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="PersonClass">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonCla__Perso__75A278F5">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="PersonClass" Type="Self.PersonClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="PersonClass">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonDis__Disci__656C112C">
+          <End Role="Discipline" Type="Self.Discipline" Multiplicity="1" />
+          <End Role="PersonDiscipline" Type="Self.PersonDiscipline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discipline">
+              <PropertyRef Name="DisciplinaryID" />
+            </Principal>
+            <Dependent Role="PersonDiscipline">
+              <PropertyRef Name="DisciplinaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonDis__Paren__6477ECF3">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="PersonDiscipline" Type="Self.PersonDiscipline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="PersonDiscipline">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonEnr__Enrol__5EBF139D">
+          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="1" />
+          <End Role="PersonEnrollment" Type="Self.PersonEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Enrollment">
+              <PropertyRef Name="EnrollmentID" />
+            </Principal>
+            <Dependent Role="PersonEnrollment">
+              <PropertyRef Name="EnrollmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonEnr__Perso__5FB337D6">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="PersonEnrollment" Type="Self.PersonEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="PersonEnrollment">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonLog__Login__6B24EA82">
+          <End Role="Login" Type="Self.Login" Multiplicity="1" />
+          <End Role="PersonLogin" Type="Self.PersonLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="LoginID" />
+            </Principal>
+            <Dependent Role="PersonLogin">
+              <PropertyRef Name="LoginID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonLog__Perso__6A30C649">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="PersonLogin" Type="Self.PersonLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="PersonLogin">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonSch__Perso__4D94879B">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="PersonSchool" Type="Self.PersonSchool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="PersonSchool">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonSch__Schoo__4E88ABD4">
+          <End Role="School" Type="Self.School" Multiplicity="1" />
+          <End Role="PersonSchool" Type="Self.PersonSchool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="SchoolID" />
+            </Principal>
+            <Dependent Role="PersonSchool">
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonSpo__Perso__59063A47">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="PersonSport" Type="Self.PersonSport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="PersonSport">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonSpo__Sport__59FA5E80">
+          <End Role="Sport" Type="Self.Sport" Multiplicity="1" />
+          <End Role="PersonSport" Type="Self.PersonSport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sport">
+              <PropertyRef Name="SportsID" />
+            </Principal>
+            <Dependent Role="PersonSport">
+              <PropertyRef Name="SportsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RoomBuild__Build__02FC7413">
+          <End Role="Building" Type="Self.Building" Multiplicity="1" />
+          <End Role="RoomBuilding" Type="Self.RoomBuilding" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Building">
+              <PropertyRef Name="BuildingID" />
+            </Principal>
+            <Dependent Role="RoomBuilding">
+              <PropertyRef Name="BuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RoomBuild__RoomI__03F0984C">
+          <End Role="Room" Type="Self.Room" Multiplicity="1" />
+          <End Role="RoomBuilding" Type="Self.RoomBuilding" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="RoomID" />
+            </Principal>
+            <Dependent Role="RoomBuilding">
+              <PropertyRef Name="RoomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SchoolBui__Build__534D60F1">
+          <End Role="Building" Type="Self.Building" Multiplicity="1" />
+          <End Role="SchoolBuilding" Type="Self.SchoolBuilding" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Building">
+              <PropertyRef Name="BuildingID" />
+            </Principal>
+            <Dependent Role="SchoolBuilding">
+              <PropertyRef Name="BuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SchoolBui__Schoo__5441852A">
+          <End Role="School" Type="Self.School" Multiplicity="1" />
+          <End Role="SchoolBuilding" Type="Self.SchoolBuilding" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="SchoolID" />
+            </Principal>
+            <Dependent Role="SchoolBuilding">
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TeachingToolsModelStoreContainer">
+          <EntitySet Name="Assignment" EntityType="Self.Assignment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Building" EntityType="Self.Building" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClassBuilding" EntityType="Self.ClassBuilding" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClassRoom" EntityType="Self.ClassRoom" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClassStandard" EntityType="Self.ClassStandard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Discipline" EntityType="Self.Discipline" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Enrollment" EntityType="Self.Enrollment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonAssignment" EntityType="Self.PersonAssignment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonAttendance" EntityType="Self.PersonAttendance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonClass" EntityType="Self.PersonClass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonDiscipline" EntityType="Self.PersonDiscipline" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonEnrollment" EntityType="Self.PersonEnrollment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonLogin" EntityType="Self.PersonLogin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonSchool" EntityType="Self.PersonSchool" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonSport" EntityType="Self.PersonSport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoomBuilding" EntityType="Self.RoomBuilding" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="School" EntityType="Self.School" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SchoolBuilding" EntityType="Self.SchoolBuilding" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sport" EntityType="Self.Sport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Standards" EntityType="Self.Standards" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ClassBuil__Build__7A672E12" Association="Self.FK__ClassBuil__Build__7A672E12">
+            <End Role="Building" EntitySet="Building" />
+            <End Role="ClassBuilding" EntitySet="ClassBuilding" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClassBuil__Class__797309D9" Association="Self.FK__ClassBuil__Class__797309D9">
+            <End Role="Class" EntitySet="Class" />
+            <End Role="ClassBuilding" EntitySet="ClassBuilding" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClassRoom__Class__7F2BE32F" Association="Self.FK__ClassRoom__Class__7F2BE32F">
+            <End Role="Class" EntitySet="Class" />
+            <End Role="ClassRoom" EntitySet="ClassRoom" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClassRoom__RoomI__00200768" Association="Self.FK__ClassRoom__RoomI__00200768">
+            <End Role="Room" EntitySet="Room" />
+            <End Role="ClassRoom" EntitySet="ClassRoom" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClassStan__Class__08B54D69" Association="Self.FK__ClassStan__Class__08B54D69">
+            <End Role="Class" EntitySet="Class" />
+            <End Role="ClassStandard" EntitySet="ClassStandard" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClassStan__Stand__09A971A2" Association="Self.FK__ClassStan__Stand__09A971A2">
+            <End Role="Standards" EntitySet="Standards" />
+            <End Role="ClassStandard" EntitySet="ClassStandard" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonAss__Assig__70DDC3D8" Association="Self.FK__PersonAss__Assig__70DDC3D8">
+            <End Role="Assignment" EntitySet="Assignment" />
+            <End Role="PersonAssignment" EntitySet="PersonAssignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonAss__Grade__6FE99F9F" Association="Self.FK__PersonAss__Grade__6FE99F9F">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="PersonAssignment" EntitySet="PersonAssignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonAtt__Atten__0E6E26BF" Association="Self.FK__PersonAtt__Atten__0E6E26BF">
+            <End Role="Attendance" EntitySet="Attendance" />
+            <End Role="PersonAttendance" EntitySet="PersonAttendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonAtt__Perso__0F624AF8" Association="Self.FK__PersonAtt__Perso__0F624AF8">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="PersonAttendance" EntitySet="PersonAttendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonCla__Class__76969D2E" Association="Self.FK__PersonCla__Class__76969D2E">
+            <End Role="Class" EntitySet="Class" />
+            <End Role="PersonClass" EntitySet="PersonClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonCla__Perso__75A278F5" Association="Self.FK__PersonCla__Perso__75A278F5">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="PersonClass" EntitySet="PersonClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonDis__Disci__656C112C" Association="Self.FK__PersonDis__Disci__656C112C">
+            <End Role="Discipline" EntitySet="Discipline" />
+            <End Role="PersonDiscipline" EntitySet="PersonDiscipline" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonDis__Paren__6477ECF3" Association="Self.FK__PersonDis__Paren__6477ECF3">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="PersonDiscipline" EntitySet="PersonDiscipline" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonEnr__Enrol__5EBF139D" Association="Self.FK__PersonEnr__Enrol__5EBF139D">
+            <End Role="Enrollment" EntitySet="Enrollment" />
+            <End Role="PersonEnrollment" EntitySet="PersonEnrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonEnr__Perso__5FB337D6" Association="Self.FK__PersonEnr__Perso__5FB337D6">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="PersonEnrollment" EntitySet="PersonEnrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonLog__Login__6B24EA82" Association="Self.FK__PersonLog__Login__6B24EA82">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="PersonLogin" EntitySet="PersonLogin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonLog__Perso__6A30C649" Association="Self.FK__PersonLog__Perso__6A30C649">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="PersonLogin" EntitySet="PersonLogin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonSch__Perso__4D94879B" Association="Self.FK__PersonSch__Perso__4D94879B">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="PersonSchool" EntitySet="PersonSchool" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonSch__Schoo__4E88ABD4" Association="Self.FK__PersonSch__Schoo__4E88ABD4">
+            <End Role="School" EntitySet="School" />
+            <End Role="PersonSchool" EntitySet="PersonSchool" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonSpo__Perso__59063A47" Association="Self.FK__PersonSpo__Perso__59063A47">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="PersonSport" EntitySet="PersonSport" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonSpo__Sport__59FA5E80" Association="Self.FK__PersonSpo__Sport__59FA5E80">
+            <End Role="Sport" EntitySet="Sport" />
+            <End Role="PersonSport" EntitySet="PersonSport" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RoomBuild__Build__02FC7413" Association="Self.FK__RoomBuild__Build__02FC7413">
+            <End Role="Building" EntitySet="Building" />
+            <End Role="RoomBuilding" EntitySet="RoomBuilding" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RoomBuild__RoomI__03F0984C" Association="Self.FK__RoomBuild__RoomI__03F0984C">
+            <End Role="Room" EntitySet="Room" />
+            <End Role="RoomBuilding" EntitySet="RoomBuilding" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SchoolBui__Build__534D60F1" Association="Self.FK__SchoolBui__Build__534D60F1">
+            <End Role="Building" EntitySet="Building" />
+            <End Role="SchoolBuilding" EntitySet="SchoolBuilding" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SchoolBui__Schoo__5441852A" Association="Self.FK__SchoolBui__Schoo__5441852A">
+            <End Role="School" EntitySet="School" />
+            <End Role="SchoolBuilding" EntitySet="SchoolBuilding" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TeachingToolsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Assignment">
+          <Key>
+            <PropertyRef Name="AssignmentID" />
+          </Key>
+          <Property Name="AssignmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AssignmentName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="AssignmentDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="PersonAssignments" Relationship="Self.FK__PersonAss__Assig__70DDC3D8" FromRole="Assignment" ToRole="PersonAssignment" />
+        </EntityType>
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="AttendanceID" />
+          </Key>
+          <Property Name="AttendanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AttendanceDate" Type="DateTime" Precision="0" />
+          <Property Name="PresentAbsent" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ExcusedUnexcused" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="People" Relationship="Self.PersonAttendance" FromRole="Attendance" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Building">
+          <Key>
+            <PropertyRef Name="BuildingID" />
+          </Key>
+          <Property Name="BuildingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BuildingName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Classes" Relationship="Self.ClassBuilding" FromRole="Building" ToRole="Class" />
+          <NavigationProperty Name="Rooms" Relationship="Self.RoomBuilding" FromRole="Building" ToRole="Room" />
+          <NavigationProperty Name="Schools" Relationship="Self.SchoolBuilding" FromRole="Building" ToRole="School" />
+        </EntityType>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="ClassID" />
+          </Key>
+          <Property Name="ClassID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClassDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Buildings" Relationship="Self.ClassBuilding" FromRole="Class" ToRole="Building" />
+          <NavigationProperty Name="Rooms" Relationship="Self.ClassRoom" FromRole="Class" ToRole="Room" />
+          <NavigationProperty Name="Standards" Relationship="Self.ClassStandard" FromRole="Class" ToRole="Standards" />
+          <NavigationProperty Name="People" Relationship="Self.PersonClass" FromRole="Class" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Discipline">
+          <Key>
+            <PropertyRef Name="DisciplinaryID" />
+          </Key>
+          <Property Name="DisciplinaryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SuspensionType" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PersonDisciplines" Relationship="Self.FK__PersonDis__Disci__656C112C" FromRole="Discipline" ToRole="PersonDiscipline" />
+        </EntityType>
+        <EntityType Name="Enrollment">
+          <Key>
+            <PropertyRef Name="EnrollmentID" />
+          </Key>
+          <Property Name="EnrollmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SchoolYear" Type="Int32" />
+          <Property Name="GraduationYear" Type="Int32" />
+          <NavigationProperty Name="People" Relationship="Self.PersonEnrollment" FromRole="Enrollment" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="LoginID" />
+          </Key>
+          <Property Name="LoginID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="People" Relationship="Self.PersonLogin" FromRole="Login" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonType" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="FName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Ethnicity" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Address1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="ZipCode" Type="Int32" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="EmergencyNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Height" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Weight" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PersonAssignments" Relationship="Self.FK__PersonAss__Grade__6FE99F9F" FromRole="Person" ToRole="PersonAssignment" />
+          <NavigationProperty Name="PersonDisciplines" Relationship="Self.FK__PersonDis__Paren__6477ECF3" FromRole="Person" ToRole="PersonDiscipline" />
+          <NavigationProperty Name="Attendances" Relationship="Self.PersonAttendance" FromRole="Person" ToRole="Attendance" />
+          <NavigationProperty Name="Classes" Relationship="Self.PersonClass" FromRole="Person" ToRole="Class" />
+          <NavigationProperty Name="Enrollments" Relationship="Self.PersonEnrollment" FromRole="Person" ToRole="Enrollment" />
+          <NavigationProperty Name="Logins" Relationship="Self.PersonLogin" FromRole="Person" ToRole="Login" />
+          <NavigationProperty Name="Schools" Relationship="Self.PersonSchool" FromRole="Person" ToRole="School" />
+          <NavigationProperty Name="Sports" Relationship="Self.PersonSport" FromRole="Person" ToRole="Sport" />
+        </EntityType>
+        <EntityType Name="PersonAssignment">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="AssignmentID" />
+          </Key>
+          <Property Name="PersonID" Type="Int32" Nullable="false" />
+          <Property Name="AssignmentID" Type="Int32" Nullable="false" />
+          <Property Name="Grade" Type="Int32" />
+          <NavigationProperty Name="Assignment" Relationship="Self.FK__PersonAss__Assig__70DDC3D8" FromRole="PersonAssignment" ToRole="Assignment" />
+          <NavigationProperty Name="Person" Relationship="Self.FK__PersonAss__Grade__6FE99F9F" FromRole="PersonAssignment" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="PersonDiscipline">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="DisciplinaryID" />
+          </Key>
+          <Property Name="PersonID" Type="Int32" Nullable="false" />
+          <Property Name="DisciplinaryID" Type="Int32" Nullable="false" />
+          <Property Name="DisciplinaryDate" Type="DateTime" Precision="0" />
+          <Property Name="DisciplinaryDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ParentNotified" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Discipline" Relationship="Self.FK__PersonDis__Disci__656C112C" FromRole="PersonDiscipline" ToRole="Discipline" />
+          <NavigationProperty Name="Person" Relationship="Self.FK__PersonDis__Paren__6477ECF3" FromRole="PersonDiscipline" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="RoomID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoomName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="RoomNumber" Type="Int32" />
+          <NavigationProperty Name="Classes" Relationship="Self.ClassRoom" FromRole="Room" ToRole="Class" />
+          <NavigationProperty Name="Buildings" Relationship="Self.RoomBuilding" FromRole="Room" ToRole="Building" />
+        </EntityType>
+        <EntityType Name="School">
+          <Key>
+            <PropertyRef Name="SchoolID" />
+          </Key>
+          <Property Name="SchoolID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SchoolLevel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="WebAddress" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="People" Relationship="Self.PersonSchool" FromRole="School" ToRole="Person" />
+          <NavigationProperty Name="Buildings" Relationship="Self.SchoolBuilding" FromRole="School" ToRole="Building" />
+        </EntityType>
+        <EntityType Name="Sport">
+          <Key>
+            <PropertyRef Name="SportsID" />
+          </Key>
+          <Property Name="SportsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SportsType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SportsName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="People" Relationship="Self.PersonSport" FromRole="Sport" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Standard">
+          <Key>
+            <PropertyRef Name="StandardsID" />
+          </Key>
+          <Property Name="StandardsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StandardsType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="StandardsName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="StandardsDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Classes" Relationship="Self.ClassStandard" FromRole="Standards" ToRole="Class" />
+        </EntityType>
+        <Association Name="FK__PersonAss__Assig__70DDC3D8">
+          <End Role="Assignment" Type="Self.Assignment" Multiplicity="1" />
+          <End Role="PersonAssignment" Type="Self.PersonAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assignment">
+              <PropertyRef Name="AssignmentID" />
+            </Principal>
+            <Dependent Role="PersonAssignment">
+              <PropertyRef Name="AssignmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonDis__Disci__656C112C">
+          <End Role="Discipline" Type="Self.Discipline" Multiplicity="1" />
+          <End Role="PersonDiscipline" Type="Self.PersonDiscipline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discipline">
+              <PropertyRef Name="DisciplinaryID" />
+            </Principal>
+            <Dependent Role="PersonDiscipline">
+              <PropertyRef Name="DisciplinaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonAss__Grade__6FE99F9F">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="PersonAssignment" Type="Self.PersonAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="PersonAssignment">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonDis__Paren__6477ECF3">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="PersonDiscipline" Type="Self.PersonDiscipline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="PersonDiscipline">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClassBuilding">
+          <End Role="Building" Type="Self.Building" Multiplicity="*" />
+          <End Role="Class" Type="Self.Class" Multiplicity="*" />
+        </Association>
+        <Association Name="ClassRoom">
+          <End Role="Class" Type="Self.Class" Multiplicity="*" />
+          <End Role="Room" Type="Self.Room" Multiplicity="*" />
+        </Association>
+        <Association Name="ClassStandard">
+          <End Role="Class" Type="Self.Class" Multiplicity="*" />
+          <End Role="Standards" Type="Self.Standard" Multiplicity="*" />
+        </Association>
+        <Association Name="PersonAttendance">
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+        </Association>
+        <Association Name="PersonClass">
+          <End Role="Class" Type="Self.Class" Multiplicity="*" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+        </Association>
+        <Association Name="PersonEnrollment">
+          <End Role="Enrollment" Type="Self.Enrollment" Multiplicity="*" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+        </Association>
+        <Association Name="PersonLogin">
+          <End Role="Login" Type="Self.Login" Multiplicity="*" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+        </Association>
+        <Association Name="PersonSchool">
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+          <End Role="School" Type="Self.School" Multiplicity="*" />
+        </Association>
+        <Association Name="PersonSport">
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+          <End Role="Sport" Type="Self.Sport" Multiplicity="*" />
+        </Association>
+        <Association Name="RoomBuilding">
+          <End Role="Building" Type="Self.Building" Multiplicity="*" />
+          <End Role="Room" Type="Self.Room" Multiplicity="*" />
+        </Association>
+        <Association Name="SchoolBuilding">
+          <End Role="Building" Type="Self.Building" Multiplicity="*" />
+          <End Role="School" Type="Self.School" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="TeachingToolsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Assignments" EntityType="Self.Assignment" />
+          <EntitySet Name="Attendances" EntityType="Self.Attendance" />
+          <EntitySet Name="Buildings" EntityType="Self.Building" />
+          <EntitySet Name="Classes" EntityType="Self.Class" />
+          <EntitySet Name="Disciplines" EntityType="Self.Discipline" />
+          <EntitySet Name="Enrollments" EntityType="Self.Enrollment" />
+          <EntitySet Name="Logins" EntityType="Self.Login" />
+          <EntitySet Name="People" EntityType="Self.Person" />
+          <EntitySet Name="PersonAssignments" EntityType="Self.PersonAssignment" />
+          <EntitySet Name="PersonDisciplines" EntityType="Self.PersonDiscipline" />
+          <EntitySet Name="Rooms" EntityType="Self.Room" />
+          <EntitySet Name="Schools" EntityType="Self.School" />
+          <EntitySet Name="Sports" EntityType="Self.Sport" />
+          <EntitySet Name="Standards" EntityType="Self.Standard" />
+          <AssociationSet Name="FK__PersonAss__Assig__70DDC3D8" Association="Self.FK__PersonAss__Assig__70DDC3D8">
+            <End Role="Assignment" EntitySet="Assignments" />
+            <End Role="PersonAssignment" EntitySet="PersonAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonDis__Disci__656C112C" Association="Self.FK__PersonDis__Disci__656C112C">
+            <End Role="Discipline" EntitySet="Disciplines" />
+            <End Role="PersonDiscipline" EntitySet="PersonDisciplines" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonAss__Grade__6FE99F9F" Association="Self.FK__PersonAss__Grade__6FE99F9F">
+            <End Role="Person" EntitySet="People" />
+            <End Role="PersonAssignment" EntitySet="PersonAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonDis__Paren__6477ECF3" Association="Self.FK__PersonDis__Paren__6477ECF3">
+            <End Role="Person" EntitySet="People" />
+            <End Role="PersonDiscipline" EntitySet="PersonDisciplines" />
+          </AssociationSet>
+          <AssociationSet Name="ClassBuilding" Association="Self.ClassBuilding">
+            <End Role="Building" EntitySet="Buildings" />
+            <End Role="Class" EntitySet="Classes" />
+          </AssociationSet>
+          <AssociationSet Name="ClassRoom" Association="Self.ClassRoom">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="Room" EntitySet="Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="ClassStandard" Association="Self.ClassStandard">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="Standards" EntitySet="Standards" />
+          </AssociationSet>
+          <AssociationSet Name="PersonAttendance" Association="Self.PersonAttendance">
+            <End Role="Attendance" EntitySet="Attendances" />
+            <End Role="Person" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="PersonClass" Association="Self.PersonClass">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="Person" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="PersonEnrollment" Association="Self.PersonEnrollment">
+            <End Role="Enrollment" EntitySet="Enrollments" />
+            <End Role="Person" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="PersonLogin" Association="Self.PersonLogin">
+            <End Role="Login" EntitySet="Logins" />
+            <End Role="Person" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="PersonSchool" Association="Self.PersonSchool">
+            <End Role="Person" EntitySet="People" />
+            <End Role="School" EntitySet="Schools" />
+          </AssociationSet>
+          <AssociationSet Name="PersonSport" Association="Self.PersonSport">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Sport" EntitySet="Sports" />
+          </AssociationSet>
+          <AssociationSet Name="RoomBuilding" Association="Self.RoomBuilding">
+            <End Role="Building" EntitySet="Buildings" />
+            <End Role="Room" EntitySet="Rooms" />
+          </AssociationSet>
+          <AssociationSet Name="SchoolBuilding" Association="Self.SchoolBuilding">
+            <End Role="Building" EntitySet="Buildings" />
+            <End Role="School" EntitySet="Schools" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TeachingToolsModelStoreContainer" CdmEntityContainer="TeachingToolsEntities">
+          <EntitySetMapping Name="Assignments">
+            <EntityTypeMapping TypeName="TeachingToolsModel.Assignment">
+              <MappingFragment StoreEntitySet="Assignment">
+                <ScalarProperty Name="AssignmentID" ColumnName="AssignmentID" />
+                <ScalarProperty Name="AssignmentName" ColumnName="AssignmentName" />
+                <ScalarProperty Name="AssignmentDescription" ColumnName="AssignmentDescription" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attendances">
+            <EntityTypeMapping TypeName="TeachingToolsModel.Attendance">
+              <MappingFragment StoreEntitySet="Attendance">
+                <ScalarProperty Name="AttendanceID" ColumnName="AttendanceID" />
+                <ScalarProperty Name="AttendanceDate" ColumnName="AttendanceDate" />
+                <ScalarProperty Name="PresentAbsent" ColumnName="PresentAbsent" />
+                <ScalarProperty Name="ExcusedUnexcused" ColumnName="ExcusedUnexcused" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Buildings">
+            <EntityTypeMapping TypeName="TeachingToolsModel.Building">
+              <MappingFragment StoreEntitySet="Building">
+                <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+                <ScalarProperty Name="BuildingName" ColumnName="BuildingName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Classes">
+            <EntityTypeMapping TypeName="TeachingToolsModel.Class">
+              <MappingFragment StoreEntitySet="Class">
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="ClassDescription" ColumnName="ClassDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Disciplines">
+            <EntityTypeMapping TypeName="TeachingToolsModel.Discipline">
+              <MappingFragment StoreEntitySet="Discipline">
+                <ScalarProperty Name="DisciplinaryID" ColumnName="DisciplinaryID" />
+                <ScalarProperty Name="SuspensionType" ColumnName="SuspensionType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Enrollments">
+            <EntityTypeMapping TypeName="TeachingToolsModel.Enrollment">
+              <MappingFragment StoreEntitySet="Enrollment">
+                <ScalarProperty Name="EnrollmentID" ColumnName="EnrollmentID" />
+                <ScalarProperty Name="SchoolYear" ColumnName="SchoolYear" />
+                <ScalarProperty Name="GraduationYear" ColumnName="GraduationYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logins">
+            <EntityTypeMapping TypeName="TeachingToolsModel.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="TeachingToolsModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="PersonType" ColumnName="PersonType" />
+                <ScalarProperty Name="FName" ColumnName="FName" />
+                <ScalarProperty Name="LName" ColumnName="LName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Ethnicity" ColumnName="Ethnicity" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmergencyNumber" ColumnName="EmergencyNumber" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonAssignments">
+            <EntityTypeMapping TypeName="TeachingToolsModel.PersonAssignment">
+              <MappingFragment StoreEntitySet="PersonAssignment">
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="AssignmentID" ColumnName="AssignmentID" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonDisciplines">
+            <EntityTypeMapping TypeName="TeachingToolsModel.PersonDiscipline">
+              <MappingFragment StoreEntitySet="PersonDiscipline">
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="DisciplinaryID" ColumnName="DisciplinaryID" />
+                <ScalarProperty Name="DisciplinaryDate" ColumnName="DisciplinaryDate" />
+                <ScalarProperty Name="DisciplinaryDescription" ColumnName="DisciplinaryDescription" />
+                <ScalarProperty Name="ParentNotified" ColumnName="ParentNotified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rooms">
+            <EntityTypeMapping TypeName="TeachingToolsModel.Room">
+              <MappingFragment StoreEntitySet="Room">
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="RoomName" ColumnName="RoomName" />
+                <ScalarProperty Name="RoomNumber" ColumnName="RoomNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schools">
+            <EntityTypeMapping TypeName="TeachingToolsModel.School">
+              <MappingFragment StoreEntitySet="School">
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="SchoolLevel" ColumnName="SchoolLevel" />
+                <ScalarProperty Name="WebAddress" ColumnName="WebAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sports">
+            <EntityTypeMapping TypeName="TeachingToolsModel.Sport">
+              <MappingFragment StoreEntitySet="Sport">
+                <ScalarProperty Name="SportsID" ColumnName="SportsID" />
+                <ScalarProperty Name="SportsType" ColumnName="SportsType" />
+                <ScalarProperty Name="SportsName" ColumnName="SportsName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Standards">
+            <EntityTypeMapping TypeName="TeachingToolsModel.Standard">
+              <MappingFragment StoreEntitySet="Standards">
+                <ScalarProperty Name="StandardsID" ColumnName="StandardsID" />
+                <ScalarProperty Name="StandardsType" ColumnName="StandardsType" />
+                <ScalarProperty Name="StandardsName" ColumnName="StandardsName" />
+                <ScalarProperty Name="StandardsDescription" ColumnName="StandardsDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ClassBuilding" TypeName="TeachingToolsModel.ClassBuilding" StoreEntitySet="ClassBuilding">
+            <EndProperty Name="Building">
+              <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+            </EndProperty>
+            <EndProperty Name="Class">
+              <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ClassRoom" TypeName="TeachingToolsModel.ClassRoom" StoreEntitySet="ClassRoom">
+            <EndProperty Name="Class">
+              <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+            </EndProperty>
+            <EndProperty Name="Room">
+              <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ClassStandard" TypeName="TeachingToolsModel.ClassStandard" StoreEntitySet="ClassStandard">
+            <EndProperty Name="Class">
+              <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+            </EndProperty>
+            <EndProperty Name="Standards">
+              <ScalarProperty Name="StandardsID" ColumnName="StandardsID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PersonAttendance" TypeName="TeachingToolsModel.PersonAttendance" StoreEntitySet="PersonAttendance">
+            <EndProperty Name="Attendance">
+              <ScalarProperty Name="AttendanceID" ColumnName="AttendanceID" />
+            </EndProperty>
+            <EndProperty Name="Person">
+              <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PersonClass" TypeName="TeachingToolsModel.PersonClass" StoreEntitySet="PersonClass">
+            <EndProperty Name="Class">
+              <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+            </EndProperty>
+            <EndProperty Name="Person">
+              <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PersonEnrollment" TypeName="TeachingToolsModel.PersonEnrollment" StoreEntitySet="PersonEnrollment">
+            <EndProperty Name="Enrollment">
+              <ScalarProperty Name="EnrollmentID" ColumnName="EnrollmentID" />
+            </EndProperty>
+            <EndProperty Name="Person">
+              <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PersonLogin" TypeName="TeachingToolsModel.PersonLogin" StoreEntitySet="PersonLogin">
+            <EndProperty Name="Login">
+              <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+            </EndProperty>
+            <EndProperty Name="Person">
+              <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PersonSchool" TypeName="TeachingToolsModel.PersonSchool" StoreEntitySet="PersonSchool">
+            <EndProperty Name="Person">
+              <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+            </EndProperty>
+            <EndProperty Name="School">
+              <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PersonSport" TypeName="TeachingToolsModel.PersonSport" StoreEntitySet="PersonSport">
+            <EndProperty Name="Person">
+              <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+            </EndProperty>
+            <EndProperty Name="Sport">
+              <ScalarProperty Name="SportsID" ColumnName="SportsID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="RoomBuilding" TypeName="TeachingToolsModel.RoomBuilding" StoreEntitySet="RoomBuilding">
+            <EndProperty Name="Building">
+              <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+            </EndProperty>
+            <EndProperty Name="Room">
+              <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="SchoolBuilding" TypeName="TeachingToolsModel.SchoolBuilding" StoreEntitySet="SchoolBuilding">
+            <EndProperty Name="Building">
+              <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+            </EndProperty>
+            <EndProperty Name="School">
+              <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,34 @@
+﻿@model FPSD.Models.Sport
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Sport</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SportsType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SportsType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SportsName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SportsName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SportsID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
